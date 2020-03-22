@@ -1,0 +1,40 @@
+<div class="container">
+   <h1>{{title}}</h1>
+   <form  (ngSubmit)="onSubmit(f)" #f="ngForm"> 
+      <label><h3 style="justify-content:center; display:flex">Add New Task</h3></label>
+   <div class="form-group">
+      <input type="text" class="form-control" name="taskName" ngModel>
+   </div>
+   <button type="submit" class="subbtn" value="Add Item">Add Item </button>
+   </form>
+   <div class="list-container">
+      <div class="todo-container column-container">
+         <div class="list"
+         cdkDropList
+         #todoList="cdkDropList"
+         [cdkDropListData]="todos"
+         [cdkDropListConnectedTo]="[doneList]"
+         (cdkDropListDropped)="onDrop($event)">
+         <h2>To Start</h2>
+         <div class="list-item" *ngFor="let todo of todos" cdkDrag>
+            <div >{{todo.name}}
+            </div><span class="closebtn"  (click)="onDeleteToDo(todo.name)">x</span>
+         </div>
+      </div>
+   </div>
+   <div class="done-container column-container">
+      <div class="list"
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="completed"
+      [cdkDropListConnectedTo]="todoList"
+      (cdkDropListDropped)="onDrop($event)">
+      <h2>Finished</h2>
+      <div class="list-item" *ngFor="let complete of completed" cdkDrag>
+         <div >{{complete.name}}</div><span class="closebtn"  (click)="onDeleteDone(complete.name)">x</span>
+
+      </div>
+   </div>
+</div>
+</div>
+</div>
